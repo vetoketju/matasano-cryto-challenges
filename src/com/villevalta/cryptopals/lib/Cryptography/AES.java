@@ -31,17 +31,22 @@ public class AES {
 
     }
 
-    private static void runRound(byte[] message, byte[] key,boolean first, boolean last){
-        if(first) message = Cryptography.xor(message, key);
-        subBytes(message);
-        shiftRows(message);
+    private static void runRound(byte[] part, byte[] key,boolean first, boolean last) throws Exception {
+
+        if(part.length != key.length){
+            throw new Exception("Part and Key are different lenght!");
+        }
+
+        if(first) part = Cryptography.xor(part, key);
+        subBytes(part);
+        shiftRows(part);
 
 
         // mixcol http://en.wikipedia.org/wiki/Rijndael_mix_columns
         // if(!last)
 
         // add key
-        message = Cryptography.xor(message,key);
+        part = Cryptography.xor(part,key);
     }
 
     private static void subBytes(byte[] message){
@@ -70,6 +75,10 @@ public class AES {
         tmp[15] = message[11];
 
         message = tmp;
+    }
+
+    private static void mixCols(byte[] message){
+
     }
 
 
