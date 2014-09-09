@@ -1,37 +1,12 @@
 package com.villevalta.cryptopals.lib;
 
 
+import java.util.ArrayList;
+
 /**
  * Created by ville on 8/16/2014.
  */
 public class Analysis {
-
-    public static void runAnalysis(String message){
-
-        boolean isHex = isHex(message,false);
-
-        System.out.println("is HEX: "+ isHex);
-        if(isHex) System.out.println("as Hex->String: \"" + Converter.hexToString(message)+"\"");
-        System.out.println("Base64: "+ isBase64(message,false));
-        // Base64 decode here
-        lengthAnalysis(message);
-    }
-
-    private static void lengthAnalysis(String message){
-        System.out.println("---- Length ----");
-        System.out.println("Character count : " + message.length());
-        System.out.println(getDisivibles(message.length()));
-        if(message.contains(" ")){
-            System.out.println("---- Spaces removed length ----");
-            System.out.println("Character count : " + message.replace(" ", "").length());
-            System.out.println(getDisivibles(message.replace(" ", "").length()));
-        }
-        if(isHex(message,true)){
-            System.out.println("---- Hex -> Bytes length ----");
-            System.out.println("Character count : " + message.length() / 2);
-            System.out.println(getDisivibles(message.length() / 2));
-        }
-    }
 
     // fast enough is fast enough for me...
     public static int hammingDistance(byte[] first, byte[] second){
@@ -45,12 +20,20 @@ public class Analysis {
         return result;
     }
 
-    private static String getDisivibles(int len){
-        String result = "Divisible by (until 64): ";
-        for (int i = 1; i <= 64; i++){
+    public static String getDivisors(int len){
+        String result = "Divisors of "+len+": ";
+        for (int i = 1; i <= len; i++){
             if(len % i == 0)result+= i+" ";
         }
         return result;
+    }
+
+    public static ArrayList<Integer> getDivisorsArray(int number){
+        ArrayList<Integer> divisors = new ArrayList<Integer>();
+        for (int i = 1; i <= number; i++){
+            if(number % i == 0) divisors.add(i);
+        }
+        return divisors;
     }
 
     public static boolean isBase64(String message, boolean removeSpaces){
@@ -66,18 +49,18 @@ public class Analysis {
     }
 
     public static void KasiskiAnalyzis(String message){
-
-
-
-
+        // Todo
     }
 
     // TODO: Clean and add some checks
-    public static int Find_Keysize_repeatingKeyXor(byte[] input){
+    public static int FindRepeatingKeyXorKeysize(byte[] input){
         int result = 0;
-        double score = 64;
-        for(int i = 2; i < (input.length < 64 ? input.length : 64);i++){
+        double score = 64; // find keysizes that are 2 to 64 size
 
+        // keysizes:
+
+
+        for(int i = 2; i < (input.length < 64 ? input.length : 64);i++){
 
             // Takes average from 10
             double hammingDistanceNormalized = 0;

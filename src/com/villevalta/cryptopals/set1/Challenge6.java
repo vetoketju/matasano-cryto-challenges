@@ -20,7 +20,11 @@ public class Challenge6 {
         reader.read(fileChars);
         byte[] input = Converter.base64ToBytes(new String(fileChars));
 
-        int KEYSIZE = Analysis.Find_Keysize_repeatingKeyXor(input);
+        System.out.println("Input size:" + input.length);
+        System.out.println(Analysis.getDivisors(input.length));
+
+
+        int KEYSIZE = Analysis.FindRepeatingKeyXorKeysize(input);
 
         System.out.println("Key size is probably: " +KEYSIZE);
 
