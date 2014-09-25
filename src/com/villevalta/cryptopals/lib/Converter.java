@@ -19,7 +19,7 @@ public class Converter {
         }
         return result;
     }
-
+    // TODO: this is wrong (endianness check?)
     public static String bytesToHex(byte[] bytes){
         char[] result = new char[bytes.length * 2];
         for(int i = 0; i < bytes.length; i++){
