@@ -22,6 +22,7 @@ public class Converter {
         return result;
     }
 
+// TODO: this is wrong (endianness check?)
     public static String bytesToHex(byte[] bytes, boolean pretty){
         char[] result = new char[bytes.length * (2 + (pretty?1:0))];
         for(int i = 0; i < bytes.length; i++){
