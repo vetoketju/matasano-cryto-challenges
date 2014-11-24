@@ -33,4 +33,20 @@ public class Utils {
         return output;
     }
 
+    // Copies the whole source array to destination
+    public static void ArrayAppend(byte[] destination, byte[] source, int index){
+        for(int i = 0; i < source.length; i++){
+            destination[index + i] = source[i];
+        }
+    }
+
+    // Input array to be shifted
+    // count = how many indexes shifted
+    public static byte[] ArrayCircularShiftLeft(byte[] input, int count){
+        byte[] result = new byte[input.length];
+        System.arraycopy(input,count,result,0, input.length - count);
+        System.arraycopy(input,0,result,input.length-count,count);
+        return result;
+    }
+
 }

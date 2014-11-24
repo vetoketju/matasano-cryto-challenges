@@ -19,7 +19,7 @@ public class Challenge2 {
 
         byte[] xorred = Cryptography.xor(inputBytes,keyBytes);
 
-        String result = Converter.bytesToHex(xorred);
+        String result = Converter.bytesToHex(xorred,true);
 
         System.out.println(result);
 

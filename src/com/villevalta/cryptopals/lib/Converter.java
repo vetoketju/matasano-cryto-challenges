@@ -13,6 +13,8 @@ public class Converter {
     }
 
     public static byte[] hexToBytes(String hex){
+        hex = hex.toUpperCase();
+        hex = hex.replace(" ","");
         byte[] result = new byte[hex.length()/2];
         for(int i = 0; i < hex.length(); i+=2){
             result[i/2] = (byte) Integer.parseInt(hex.substring(i,i+2),16);
@@ -20,12 +22,13 @@ public class Converter {
         return result;
     }
 
-    public static String bytesToHex(byte[] bytes){
-        char[] result = new char[bytes.length * 2];
+    public static String bytesToHex(byte[] bytes, boolean pretty){
+        char[] result = new char[bytes.length * (2 + (pretty?1:0))];
         for(int i = 0; i < bytes.length; i++){
             int a = bytes[i] & 0xFF;
-            result[i * 2] = hexIndex[a >>> 4];
-            result[i * 2 + 1] = hexIndex[a & 0x0F];
+            result[i * (2 + (pretty?1:0))] = hexIndex[a >>> 4];
+            result[i * (2 + (pretty?1:0)) + 1] = hexIndex[a & 0x0F];
+            if(pretty) result[i * 3 + 2] = ' ';
         }
         return new String(result);
     }
