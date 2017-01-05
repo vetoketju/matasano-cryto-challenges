@@ -12,8 +12,8 @@ public class Analysis {
     public static int hammingDistance(byte[] first, byte[] second){
         int result = first.length * 8;
         for(int i = 0; i < first.length; i++){
-            for(int m = 0x01; m != 0x100; m <<=1){ // and that is how you iterate bits in byte :)
-                result -= ( ((first[i]&m)!=0) == ((second[i]&m)!=0) ) ? 1 : 0;
+            for(byte m = 1; m != 0; m <<= 1){
+                result -= (((first[i] & m) != 0) == ((second[i] & m) != 0) ) ? 1 : 0;
             }
         }
         if(second.length > first.length) result += (second.length - first.length) * 8;
